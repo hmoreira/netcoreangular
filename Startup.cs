@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
+using vega.Persistence;
+using AutoMapper;
 
 namespace WebApplicationBasic
 {
@@ -30,7 +32,10 @@ namespace WebApplicationBasic
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddAutoMapper();
+            services.AddMvc().AddJsonOptions(x => 
+                x.SerializerSettings.ReferenceLoopHandling = 
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddDbContext<VegaDbContext>(options => 
                 options.UseSqlServer(Configuration.GetConnectionString("Default")));
         }

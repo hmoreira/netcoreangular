@@ -6,7 +6,8 @@ import { sharedConfig } from './app.module.shared';
 
 @NgModule({
     bootstrap: sharedConfig.bootstrap,
-    declarations: sharedConfig.declarations,
+    declarations: [
+        ...sharedConfig.declarations],
     imports: [
         BrowserModule,
         FormsModule,
